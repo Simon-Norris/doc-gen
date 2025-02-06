@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-file-upload',
@@ -26,7 +26,16 @@ export class FileUploadComponent {
     formData.append('template', this.selectedWordFile as File);
     formData.append('jsonFile', this.selectedJsonFile as File);
     this.http.post('http://localhost:9999/documents/upload', formData)
-      .subscribe(response => console.log('File uploaded!', response));
+      .subscribe({
+        next: (response) => {
+          console.log('File uploaded successfully!', response);
+          alert('Upload successful!');
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Error uploading file:', error);
+          alert(`Upload failed: ${error.message}`);
+        }
+      });
   }
 
   downloadFile(format: string) {
