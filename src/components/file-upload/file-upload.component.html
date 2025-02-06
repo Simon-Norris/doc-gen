@@ -17,5 +17,6 @@
   <hr>
 
   <!-- Download as Word Button -->
-  <button (click)="downloadFile('word')">Download as Word</button>
+  <input type="number" min="1" [(ngModel)]="documentId"/>
+  <button (click)="downloadFile(documentId)">Download as Word</button>
 </div>

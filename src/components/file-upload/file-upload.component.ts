@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   standalone: true,
+  imports: [
+    FormsModule
+  ],
   styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent {
   selectedWordFile: File | null = null;
   selectedJsonFile: File | null = null;
+  documentId: number = 1;
 
   constructor(private http: HttpClient) {}
 
@@ -38,15 +43,18 @@ export class FileUploadComponent {
       });
   }
 
-  downloadFile(format: string) {
-    this.http.get(`http://localhost:9999/documents/download/${format}`, { responseType: 'blob' })
+  downloadFile(id: number) {
+    this.http.get(`http://localhost:9999/documents/download/word/${id}`, { responseType: 'blob' })
       .subscribe(blob => {
         const a = document.createElement('a');
         const objectUrl = URL.createObjectURL(blob);
         a.href = objectUrl;
-        a.download = `document.${format}`;
+        a.download = `document.docx`;
         a.click();
         URL.revokeObjectURL(objectUrl);
+      }, error => {
+        console.error('Error downloading file:', error);
+        alert(`Download failed: ${error.message}`);
       });
   }
 }
