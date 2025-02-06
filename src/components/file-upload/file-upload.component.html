@@ -1,0 +1,21 @@
+<div>
+  <!-- Word Template File Input -->
+  <label for="templateFile">Choose Template (Word) </label>
+  <input type="file" id="templateFile" accept=".docx" (change)="onWordFileSelected($event)" />
+
+  <br><br>
+
+  <!-- JSON Data File Input -->
+  <label for="jsonFile">Choose Your JSON </label>
+  <input type="file" id="jsonFile" accept=".json" (change)="onJsonFileSelected($event)" />
+
+  <br><br>
+
+  <!-- Upload Button -->
+  <button (click)="uploadFile()">Upload Files</button>
+
+  <hr>
+
+  <!-- Download as Word Button -->
+  <button (click)="downloadFile('word')">Download as Word</button>
+</div>
