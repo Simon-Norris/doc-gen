@@ -1,22 +1,40 @@
-<div>
+<div class="file-upload-container">
+  <h2>Document Upload and Download</h2>
+
   <!-- Word Template File Input -->
-  <label for="templateFile">Choose Template (Word) </label>
-  <input type="file" id="templateFile" accept=".docx" (change)="onWordFileSelected($event)" />
+  <div class="file-input-group">
+    <label for="templateFile" class="file-label">Choose Word Template</label>
+    <input type="file" id="templateFile" (change)="onWordFileSelected($event)" class="file-input" />
+  </div>
 
-  <br><br>
-
-  <!-- JSON Data File Input -->
-  <label for="jsonFile">Choose Your JSON </label>
-  <input type="file" id="jsonFile" accept=".json" (change)="onJsonFileSelected($event)" />
-
-  <br><br>
+  <div class="file-input-group">
+    <label for="jsonFile" class="file-label">Choose JSON Data</label>
+    <input type="file" id="jsonFile" accept=".json" (change)="onJsonFileSelected($event)" class="file-input" />
+  </div>
 
   <!-- Upload Button -->
-  <button (click)="uploadFile()">Upload Files</button>
+  <div class="upload-button">
+    <button (click)="uploadFile()" class="btn btn-primary">Upload Files</button>
+  </div>
 
-  <hr>
+  <hr />
 
-  <!-- Download as Word Button -->
-  <input type="number" min="1" [(ngModel)]="documentId"/>
-  <button (click)="downloadFile(documentId)">Download as Word</button>
+  <!-- Document ID and Download Section -->
+  <div class="download-section">
+    <h3>Download Generated Document</h3>
+
+    <div class="download-input-group">
+      <label for="documentId" class="download-label">Document ID:</label>
+      <input type="number" [(ngModel)]="documentId" id="documentId" min="1" class="download-input" />
+
+      <label for="format" class="download-label">Select Format:</label>
+      <select [(ngModel)]="selectedFormat" id="format" class="download-input">
+        <option value="word">Word (.docx)</option>
+        <option value="html">HTML</option>
+        <option value="pdf">PDF</option>
+      </select>
+    </div>
+
+    <button (click)="downloadFile(documentId, selectedFormat)" class="btn btn-secondary">Download</button>
+  </div>
 </div>
