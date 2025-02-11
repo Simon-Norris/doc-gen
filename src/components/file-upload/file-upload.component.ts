@@ -64,6 +64,8 @@ export class FileUploadComponent {
           fileName = `document.html`;  // HTML files should have a .html extension
         } else if (fileExtension === 'pdf') {
           fileName = `document.pdf`;  // PDF files should have a .pdf extension
+        } else if (fileExtension === 'ftl') {
+          fileName= `doc.html`
         }
 
         // Trigger download
