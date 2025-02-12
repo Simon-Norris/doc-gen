@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import {RichTextEditorComponent} from '../rich-text-editor/rich-text-editor.component';
 
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    RichTextEditorComponent
   ],
   styleUrls: ['./file-upload.component.css']
 })

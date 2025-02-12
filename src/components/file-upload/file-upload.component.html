@@ -1,41 +1,46 @@
 <div class="file-upload-container">
-  <h2>Document Upload and Download</h2>
+  <div class="file-upload-box">
+    <h2>Document Upload and Download</h2>
 
-  <!-- Word Template File Input -->
-  <div class="file-input-group">
-    <label for="templateFile" class="file-label">Choose Word Template</label>
-    <input type="file" id="templateFile" (change)="onWordFileSelected($event)" class="file-input" />
-  </div>
-
-  <div class="file-input-group">
-    <label for="jsonFile" class="file-label">Choose JSON Data</label>
-    <input type="file" id="jsonFile" accept=".json" (change)="onJsonFileSelected($event)" class="file-input" />
-  </div>
-
-  <!-- Upload Button -->
-  <div class="upload-button">
-    <button (click)="uploadFile()" class="btn btn-primary">Upload Files</button>
-  </div>
-
-  <hr />
-
-  <!-- Document ID and Download Section -->
-  <div class="download-section">
-    <h3>Download Generated Document</h3>
-
-    <div class="download-input-group">
-      <label for="documentId" class="download-label">Document ID:</label>
-      <input type="number" [(ngModel)]="documentId" id="documentId" min="1" class="download-input" />
-
-      <label for="format" class="download-label">Select Format:</label>
-      <select [(ngModel)]="selectedFormat" id="format" class="download-input">
-        <option value="word">Word (.docx)</option>
-        <option value="html">HTML</option>
-        <option value="pdf">PDF</option>
-        <option value="ftl">FTL (.ftl)</option>
-      </select>
+    <!-- Word Template File Input -->
+    <div class="file-input-group">
+      <label for="templateFile" class="file-label">Choose Word Template</label>
+      <input type="file" id="templateFile" (change)="onWordFileSelected($event)" class="file-input" />
     </div>
 
-    <button (click)="downloadFile(documentId, selectedFormat)" class="btn btn-secondary">Download</button>
+    <div class="file-input-group">
+      <label for="jsonFile" class="file-label">Choose JSON Data</label>
+      <input type="file" id="jsonFile" accept=".json" (change)="onJsonFileSelected($event)" class="file-input" />
+    </div>
+
+    <!-- Upload Button -->
+    <div class="upload-button">
+      <button (click)="uploadFile()" class="btn btn-primary">Upload Files</button>
+    </div>
+
+    <hr />
+
+    <!-- Document ID and Download Section -->
+    <div class="download-section">
+      <h3>Download Generated Document</h3>
+
+      <div class="download-input-group">
+        <label for="documentId" class="download-label">Document ID:</label>
+        <input type="number" [(ngModel)]="documentId" id="documentId" min="1" class="download-input" />
+
+        <label for="format" class="download-label">Select Format:</label>
+        <select [(ngModel)]="selectedFormat" id="format" class="download-input">
+          <option value="word">Word (.docx)</option>
+          <option value="html">HTML</option>
+          <option value="pdf">PDF</option>
+          <option value="ftl">FTL (.ftl)</option>
+        </select>
+      </div>
+
+      <button (click)="downloadFile(documentId, selectedFormat)" class="btn btn-secondary">Download</button>
+    </div>
+  </div>
+  <div class="rich-text-editor">
+    <app-rich-text-editor/>
   </div>
 </div>

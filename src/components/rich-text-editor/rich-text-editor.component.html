@@ -1,0 +1,9 @@
+<div>
+  <quill-editor
+    [(ngModel)]="editorContent"
+    [modules]="editorConfig"
+    [style]="{height: '300px'}">
+  </quill-editor>
+
+  <button (click)="saveContent()">Save</button>
+</div>

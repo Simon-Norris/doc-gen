@@ -7,6 +7,11 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+.file-upload-box, .rich-text-editor{
+  border: 2px solid burlywood;
+  padding: 15px;
+  margin-bottom: 15px;
+}
 
 /* Heading styling */
 h2 {
@@ -17,7 +22,7 @@ h2 {
 
 /* Input group styling */
 .file-input-group {
-  margin-bottom: 15px;
+  margin: 15px;
 }
 
 .file-label {
