@@ -5,5 +5,11 @@
     [style]="{height: '300px'}">
   </quill-editor>
 
+  <div class="json">
+    <textarea id="json" rows="10" cols="50" placeholder="Enter valid json here" class="file-input" [(ngModel)]="jsonData" required></textarea>
+    <p *ngIf="response">Response: {{ response }}</p>
+    <input type="text" id="name" class="file-input" [(ngModel)]="templateName" required/>
+  </div>
+
   <button (click)="saveContent()">Save</button>
 </div>
