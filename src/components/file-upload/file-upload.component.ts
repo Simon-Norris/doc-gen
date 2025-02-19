@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpErrorResponse} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import {RichTextEditorComponent} from '../rich-text-editor/rich-text-editor.component';
 
@@ -9,7 +9,7 @@ import {RichTextEditorComponent} from '../rich-text-editor/rich-text-editor.comp
   standalone: true,
   imports: [
     FormsModule,
-    RichTextEditorComponent
+    HttpClientModule
   ],
   styleUrls: ['./file-upload.component.css']
 })

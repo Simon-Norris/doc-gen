@@ -4,10 +4,10 @@ import {RichTextEditorComponent} from '../components/rich-text-editor/rich-text-
 import {NgModule} from '@angular/core';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: 'file-upload', pathMatch: 'full' },
   { path: 'file-upload', component: FileUploadComponent },
   { path: 'editor', component: RichTextEditorComponent },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'file-upload' }
 ];
 
 @NgModule({

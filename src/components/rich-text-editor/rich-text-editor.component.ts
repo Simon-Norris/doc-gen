@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { QuillEditorComponent } from 'ngx-quill';
 import { FormsModule } from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {NgIf} from '@angular/common';
 
 @Component({
@@ -10,6 +10,7 @@ import {NgIf} from '@angular/common';
   imports: [
     QuillEditorComponent,
     FormsModule,
+    HttpClientModule,
     NgIf
   ],
   templateUrl: './rich-text-editor.component.html',
