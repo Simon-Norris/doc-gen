@@ -39,7 +39,7 @@ export class RichTextEditorComponent {
     '    {"name": "Laptop"}\n' +
     '  ]\n' +
     '}\n';
-  templateName = 'Template Name';
+  templateName = 'Template Name 2';
   response = '';
 
   constructor(private http: HttpClient) {}

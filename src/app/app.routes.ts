@@ -1,3 +1,17 @@
-import { Routes } from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
+import {FileUploadComponent} from '../components/file-upload/file-upload.component';
+import {RichTextEditorComponent} from '../components/rich-text-editor/rich-text-editor.component';
+import {NgModule} from '@angular/core';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: 'file-upload', component: FileUploadComponent },
+  { path: 'editor', component: RichTextEditorComponent },
+  { path: '**', redirectTo: '' }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutes { }

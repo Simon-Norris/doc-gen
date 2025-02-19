@@ -1,5 +1,17 @@
-<div>
-  <hr/>
-  <app-file-upload/>
+<div class="wrapper">
+  <nav>
+    <a routerLink="/">Home</a>
+    <a routerLink="/file-upload">File Upload</a>
+    <a routerLink="/editor">Rich Text Editor</a>
+  </nav>
+
+  <h1 class="main-head">DOCUMENT GENERATION</h1>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Angular App. All rights reserved.</p>
+  </footer>
 </div>
-<router-outlet />
