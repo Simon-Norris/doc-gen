@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QuillEditorComponent } from 'ngx-quill';
+import {QuillEditorComponent, QuillModule} from 'ngx-quill';
 import { FormsModule } from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {NgIf} from '@angular/common';
@@ -11,7 +11,8 @@ import {NgIf} from '@angular/common';
     QuillEditorComponent,
     FormsModule,
     HttpClientModule,
-    NgIf
+    NgIf,
+    QuillModule
   ],
   templateUrl: './rich-text-editor.component.html',
   styleUrls: ['./rich-text-editor.component.css']
@@ -61,33 +62,31 @@ export class RichTextEditorComponent {
   };
 
   saveContent() {
-    try {
-      JSON.parse(this.jsonData);
-
-      let params = {
-        "content": this.editorContent,
-        "name": this.templateName,
-        "json": this.jsonData
-      }
-
-      this.http.post('http://localhost:9999/api/v1/rich-text/create-template', params).subscribe(
-        (res: any) => {
-          if (res.templateId == undefined || res.templateId == null) {
-            this.response= "Template was not saved"
-            return
-          } else {
-            this.generateFile(res.templateId)
-          }
-        },
-        (err) => {
-          console.error(err)
-          this.response = 'Error processing request due to: ' + err.message
-        }
-      );
-
-    } catch (error) {
-      this.response='Invalid json format'
+    if (!this.isValidJson(this.jsonData)) {
+      this.response = 'Invalid JSON format';
+      return;
     }
+
+    let params = {
+      "content": this.editorContent,
+      "name": this.templateName,
+      "json": this.jsonData
+    }
+
+    this.http.post('http://localhost:9999/api/v1/rich-text/create-template', params).subscribe(
+      (res: any) => {
+        if (res.templateId == undefined || res.templateId == null) {
+          this.response= "Template was not saved"
+          return
+        } else {
+          this.generateFile(res.templateId)
+        }
+      },
+      (err) => {
+        console.error(err)
+        this.response = 'Error processing request due to: ' + err.message
+      }
+    );
   }
 
   generateFile(id: number) {
@@ -105,4 +104,14 @@ export class RichTextEditorComponent {
         alert(`Download failed: ${error.message}`);
       });
   }
+
+  isValidJson(json: string): boolean {
+    try {
+      JSON.parse(json);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
 }

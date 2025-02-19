@@ -1,117 +1,63 @@
-/* Container styling */
-.file-upload-container {
-  max-width: 600px;
-  margin: 0 auto;
+.rich-text-editor-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.file-upload-box, .rich-text-editor{
-  border: 2px solid burlywood;
-  padding: 15px;
-  margin-bottom: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  gap: 40px;
 }
 
-/* Heading styling */
-h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+/* JSON Input Section */
+.json {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* Input group styling */
-.file-input-group {
-  margin: 15px;
-}
-
-.file-label {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 5px;
-  display: block;
-}
-
+/* Textarea & Input Styling */
 .file-input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #f8f8f8;
+  font-size: 14px;
+  font-family: monospace;
+  resize: vertical;
 }
 
-.upload-button {
-  text-align: center;
-}
-
-.btn {
+/* Button Styling */
+button {
+  margin-top: 15px;
   padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 10px;
+  transition: background 0.3s ease-in-out;
 }
 
-.btn-primary {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #45a049;
-}
-
-.btn-secondary {
-  background-color: #007BFF;
-  color: white;
-}
-
-.btn-secondary:hover {
+button:hover {
   background-color: #0056b3;
 }
 
-/* Download section styling */
-.download-section {
-  margin-top: 30px;
-  text-align: center;
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
 }
 
-.download-input-group {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.download-label {
-  font-size: 16px;
-  color: #555;
-  margin-right: 10px;
-}
-
-.download-input {
-  padding: 8px;
-  width: 45%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #f8f8f8;
-}
-
-hr {
-  margin: 30px 0;
-  border: 1px solid #ddd;
-}
-
-/* Responsiveness */
-@media (max-width: 600px) {
-  .download-input-group {
-    flex-direction: column;
-  }
-
-  .download-input {
-    width: 100%;
-    margin-bottom: 10px;
-  }
+/* Response Message */
+p {
+  font-size: 14px;
+  color: #d9534f;
+  margin-top: 5px;
 }
