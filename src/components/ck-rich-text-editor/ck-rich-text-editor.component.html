@@ -1,0 +1,20 @@
+<div class="rich-text-editor-container">
+  <div class="json">
+    <ckeditor
+      [editor]="Editor"
+      [(ngModel)]="editorContent"
+      [config]="editorConfig">
+    </ckeditor>
+  </div>
+
+  <h2>Preview:</h2>
+  <div class="preview-container" [innerHTML]="previewedContent"></div>
+
+  <div class="json">
+    <textarea id="json" rows="10" cols="50" placeholder="Enter valid json here" class="file-input" [(ngModel)]="jsonData" required></textarea>
+    <p *ngIf="response">Response: {{ response }}</p>
+    <input type="text" id="name" class="file-input" [(ngModel)]="templateName" required/>
+  </div>
+
+  <button (click)="saveContent()">Save</button>
+</div>

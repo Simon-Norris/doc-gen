@@ -1,0 +1,71 @@
+.rich-text-editor-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  gap: 40px;
+}
+
+/* JSON Input Section */
+.json {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Textarea & Input Styling */
+.file-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: monospace;
+  resize: vertical;
+}
+
+/* Button Styling */
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* Response Message */
+p {
+  font-size: 14px;
+  color: #d9534f;
+  margin-top: 5px;
+}
+
+.preview-container {
+  border: 1px solid #ddd;
+  padding: 10px;
+  min-height: 100px;
+  background: #f9f9f9;
+}
+
