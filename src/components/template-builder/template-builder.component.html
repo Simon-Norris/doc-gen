@@ -1,0 +1,28 @@
+<div class="template-builder">
+  <!-- Left Side: JSON Data -->
+  <div class="json-data">
+    <h2>JSON Data</h2>
+    <pre>{{ jsonData }}</pre>
+  </div>
+
+  <!-- Center: Template Editor -->
+  <div class="template-editor">
+    <h2>Template Editor</h2>
+    <editor [init]="{ height: 300 }" formControlName="template"></editor>
+  </div>
+
+  <!-- Right Side: FreeMarker Expressions -->
+  <div class="freemarker-expressions">
+    <h2>FreeMarker Expressions</h2>
+    <button (click)="insertVariable('name')">Insert Variable (name)</button>
+    <button (click)="insertVariable('age')">Insert Variable (age)</button>
+    <button (click)="insertCondition('age > 18')">Insert Condition</button>
+    <button (click)="insertLoop('items')">Insert Loop</button>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview">
+    <h2>Preview</h2>
+    <pre>{{ templateForm.get('template').value }}</pre>
+  </div>
+</div>
