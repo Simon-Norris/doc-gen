@@ -1,0 +1,95 @@
+/* General form styling */
+form {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+h2 {
+  margin-top: 20px;
+  color: #333;
+}
+
+/* Input and textarea styling */
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Button styling */
+button {
+  padding: 8px 16px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Remove button styling */
+button[type="button"] {
+  background-color: #dc3545;
+  margin-left: 10px;
+}
+
+button[type="button"]:hover {
+  background-color: #c82333;
+}
+
+/* Form array item styling */
+div[formArrayName] > div {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Dynamic data form styling */
+.dynamic-data-form {
+  margin-top: 20px;
+}
+
+.dynamic-data-form input {
+  width: calc(100% - 100px);
+}
+
+.dynamic-data-form button {
+  width: 90px;
+}
+
+/* Preview section styling */
+.preview-section {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
