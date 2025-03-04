@@ -1,84 +1,64 @@
-.rich-text-editor-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
+/* Main container for the layout */
+.interactive-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* JSON editor on the left, Quill editor on the right */
+  gap: 20px;
   padding: 20px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  gap: 40px;
 }
 
-/* JSON Input Section */
-.json {
-  width: 100%;
-  margin-top: 20px;
+.json-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
-/* Textarea & Input Styling */
+.editor-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.save-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .file-input {
   width: 100%;
+  margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   font-size: 14px;
-  font-family: monospace;
-  resize: vertical;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-/* Button Styling */
 button {
-  margin-top: 15px;
   padding: 10px 20px;
-  font-size: 16px;
+  background-color: #4CAF50;
   color: white;
-  background-color: #007bff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
 }
 
 button:hover {
-  background-color: #0056b3;
-}
-
-button:disabled {
-  background-color: #aaa;
-  cursor: not-allowed;
-}
-
-/* Response Message */
-p {
-  font-size: 14px;
-  color: #d9534f;
-  margin-top: 5px;
+  background-color: #45a049;
 }
 
 .json-field-selector {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  max-height: 200px;
-  overflow-y: auto;
-  width: 200px;
   position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  max-width: 200px;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .json-field-selector div {
-  padding: 8px;
+  padding: 10px;
   cursor: pointer;
 }
 
 .json-field-selector div:hover {
   background-color: #f0f0f0;
 }
-
