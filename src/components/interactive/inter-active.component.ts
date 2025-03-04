@@ -157,3 +157,4 @@ export class InterActiveComponent {
     }
   }
 }
+//TODO:: 1.interactive dropdown feature right on cursor 2. handle all kind of basic syntax provided by freemarker  3. json schema validation for nested and deep objects as well in user friendly manner
