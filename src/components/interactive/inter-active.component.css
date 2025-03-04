@@ -6,14 +6,25 @@
   padding: 20px;
 }
 
+/* JSON container and fields */
 .json-container {
   display: flex;
   flex-direction: column;
 }
 
+.json-container label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 .editor-container {
   display: flex;
   flex-direction: column;
+}
+
+.editor-container label {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .save-button-container {
