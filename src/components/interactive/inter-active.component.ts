@@ -20,20 +20,7 @@ import {NgForOf, NgIf, NgStyle} from '@angular/common';
   styleUrls: ['./inter-active.component.css']
 })
 export class InterActiveComponent {
-  editorContent = 'Hello, ${name}\n' +
-    '\n' +
-    '<#if (age < 18)>\n' +
-    '    You are a minor.\n' +
-    '<#elseif (age <= 60)>\n' +
-    '    You are an adult.\n' +
-    '<#else>\n' +
-    '    You are a senior citizen.\n' +
-    '</#if>\n' +
-    '\n' +
-    'Items:\n' +
-    '<#list items as item>\n' +
-    '    ${item_index + 1}. ${item.name}\n' +
-    '</#list>';
+  editorContent = '';
 
   jsonData = '{\n' +
     '  "name": "John",\n' +
@@ -98,7 +85,7 @@ export class InterActiveComponent {
     if (this.cursorPosition) {
       quillEditor.setSelection(this.cursorPosition.index, this.cursorPosition.length);
 
-      const textToInsert = `{{${field.id}}}`;
+      const textToInsert = `\${${field.id}}`;
       quillEditor.insertText(this.cursorPosition.index, textToInsert);
       this.showJsonSelector = false;
     }
