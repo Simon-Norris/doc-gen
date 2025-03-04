@@ -52,6 +52,7 @@ export class InterActiveComponent {
   showJsonSelector: boolean = false; // To control the dropdown visibility
   dropdownPosition: any = {}; // To dynamically set dropdown position
   @ViewChild(QuillEditorComponent) quill!: QuillEditorComponent;
+  cursorPosition: { index: number, length: number } | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -74,11 +75,15 @@ export class InterActiveComponent {
     this.showJsonFieldSelector();
   }
 
-  // Show the JSON field selector (dropdown) on Ctrl+Space
   showJsonFieldSelector(): void {
+    this.jsonFields = this.extractJsonFields(this.jsonData)
     this.showJsonSelector = true;
-    const quillEditorEl = this.quill.quillEditor?.root;
-    const editorBounds = quillEditorEl?.getBoundingClientRect();
+    const selection = this.quill.quillEditor?.getSelection();
+
+    if (selection) {
+      this.cursorPosition = { index: selection.index, length: selection.length };
+    }
+    const editorBounds = this.quill.quillEditor?.root?.getBoundingClientRect();
     if (editorBounds) {
       this.dropdownPosition = {
         top: `${editorBounds.bottom + 5}px`, // position just below the editor
@@ -87,15 +92,15 @@ export class InterActiveComponent {
     }
   }
 
-  // Insert the selected JSON field into the editor
   insertJsonField(field: { id: string, label: string }): void {
     const quillEditor = this.quill.quillEditor;
-    const cursorPosition = quillEditor.getSelection();
-    const textToInsert = `{{${field.id}}}`;
 
-    if (cursorPosition) {
-      quillEditor.insertText(cursorPosition.index, textToInsert);
-      this.showJsonSelector = false; // Hide the dropdown after selection
+    if (this.cursorPosition) {
+      quillEditor.setSelection(this.cursorPosition.index, this.cursorPosition.length);
+
+      const textToInsert = `{{${field.id}}}`;
+      quillEditor.insertText(this.cursorPosition.index, textToInsert);
+      this.showJsonSelector = false;
     }
   }
 
