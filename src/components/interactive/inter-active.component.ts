@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {QuillEditorComponent, QuillModule} from 'ngx-quill';
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {NgIf} from '@angular/common';
+import {NgForOf, NgIf, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-interactive',
@@ -12,7 +12,9 @@ import {NgIf} from '@angular/common';
     FormsModule,
     HttpClientModule,
     NgIf,
-    QuillModule
+    QuillModule,
+    NgStyle,
+    NgForOf
   ],
   templateUrl: './inter-active.component.html',
   styleUrls: ['./inter-active.component.css']
@@ -32,6 +34,7 @@ export class InterActiveComponent {
     '<#list items as item>\n' +
     '    ${item_index + 1}. ${item.name}\n' +
     '</#list>';
+
   jsonData = '{\n' +
     '  "name": "John",\n' +
     '  "age": 25,\n' +
@@ -41,10 +44,16 @@ export class InterActiveComponent {
     '    {"name": "Laptop"}\n' +
     '  ]\n' +
     '}\n';
-  templateName = 'Template Name 2';
+
+  templateName = 'Interactive templates';
   response = '';
 
-  constructor(private http: HttpClient) {}
+  jsonFields: { id: string, label: string }[] = [];
+  showJsonSelector: boolean = false; // To control the dropdown visibility
+  dropdownPosition: any = {}; // To dynamically set dropdown position
+  @ViewChild(QuillEditorComponent) quill!: QuillEditorComponent;
+
+  constructor(private http: HttpClient) { }
 
   editorConfig = {
     toolbar: [
@@ -60,6 +69,49 @@ export class InterActiveComponent {
       imageResize: {},
     },
   };
+  listenOnCtrlSpace($event: any): void {
+    $event.preventDefault();
+    this.showJsonFieldSelector();
+  }
+
+  // Show the JSON field selector (dropdown) on Ctrl+Space
+  showJsonFieldSelector(): void {
+    this.showJsonSelector = true;
+    const quillEditorEl = this.quill.quillEditor?.root;
+    const editorBounds = quillEditorEl?.getBoundingClientRect();
+    if (editorBounds) {
+      this.dropdownPosition = {
+        top: `${editorBounds.bottom + 5}px`, // position just below the editor
+        left: `${editorBounds.left}px`,
+      };
+    }
+  }
+
+  // Insert the selected JSON field into the editor
+  insertJsonField(field: { id: string, label: string }): void {
+    const quillEditor = this.quill.quillEditor;
+    const cursorPosition = quillEditor.getSelection();
+    const textToInsert = `{{${field.id}}}`;
+
+    if (cursorPosition) {
+      quillEditor.insertText(cursorPosition.index, textToInsert);
+      this.showJsonSelector = false; // Hide the dropdown after selection
+    }
+  }
+
+  // Load JSON fields dynamically from jsonData
+  extractJsonFields(jsonData: string): { id: string, label: string }[] {
+    try {
+      const json = JSON.parse(jsonData);
+      return Object.keys(json).map((key) => ({
+        id: key,
+        label: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the label for better UI
+      }));
+    } catch {
+      return [];
+    }
+  }
+
 
   saveContent() {
     if (!this.isValidJson(this.jsonData)) {
@@ -76,15 +128,15 @@ export class InterActiveComponent {
     this.http.post('http://localhost:9999/api/v1/rich-text/create-template', params).subscribe(
       (res: any) => {
         if (res.templateId == undefined || res.templateId == null) {
-          this.response= "Template was not saved"
-          return
+          this.response = "Template was not saved";
+          return;
         } else {
-          this.generateFile(res.templateId)
+          this.generateFile(res.templateId);
         }
       },
       (err) => {
-        console.error(err)
-        this.response = 'Error processing request due to: ' + err.message
+        console.error(err);
+        this.response = 'Error processing request due to: ' + err.message;
       }
     );
   }
@@ -95,7 +147,6 @@ export class InterActiveComponent {
         const a = document.createElement('a');
         const objectUrl = URL.createObjectURL(blob);
         a.href = objectUrl;
-
         a.download = "output.html";
         a.click();
         URL.revokeObjectURL(objectUrl);
@@ -113,5 +164,4 @@ export class InterActiveComponent {
       return false;
     }
   }
-
 }

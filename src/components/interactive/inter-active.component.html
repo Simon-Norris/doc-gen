@@ -4,16 +4,26 @@
       [(ngModel)]="editorContent"
       [modules]="editorConfig"
       [style]="{height: '300px'}"
-      id="quill-editor-x"
+      (keydown.control.space)="listenOnCtrlSpace($event)"
+      placeholder="Write your freemarker templates here..."
+
+      id="quill-editor-interactive"
     >
     </quill-editor>
   </div>
 
   <div class="json">
-    <textarea id="json" rows="10" cols="50" placeholder="Enter valid json here" class="file-input" [(ngModel)]="jsonData" required></textarea>
+    <textarea id="json" rows="10" cols="50" placeholder="Enter valid JSON here" class="file-input" [(ngModel)]="jsonData" required></textarea>
     <p *ngIf="response">Response: {{ response }}</p>
     <input type="text" id="name" class="file-input" [(ngModel)]="templateName" required/>
   </div>
 
   <button (click)="saveContent()">Save</button>
+</div>
+
+<!-- JSON Field Selector Dropdown -->
+<div *ngIf="showJsonSelector" class="json-field-selector" [ngStyle]="dropdownPosition">
+  <div *ngFor="let field of jsonFields" (click)="insertJsonField(field)">
+    {{ field.label }}
+  </div>
 </div>
