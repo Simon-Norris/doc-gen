@@ -7,14 +7,23 @@
 }
 
 /* JSON container and fields */
-.json-container {
+.left-container {
   display: flex;
   flex-direction: column;
 }
 
-.json-container label {
+.left-container label {
   font-weight: bold;
   margin-bottom: 5px;
+}
+
+.template-container, .json-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.template-container{
+  margin-top: 16px;
 }
 
 .editor-container {
@@ -72,4 +81,10 @@ button:hover {
 
 .json-field-selector div:hover {
   background-color: #f0f0f0;
+}
+.red{
+  color: red;
+}
+.err-border{
+  border: 1px solid red !important;
 }

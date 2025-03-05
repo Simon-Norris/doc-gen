@@ -1,11 +1,18 @@
 <div class="interactive-container">
 
-  <div class="json-container">
-    <label for="json">JSON Data</label>
-    <textarea id="json" rows="10" cols="50" placeholder="Enter valid JSON here" class="file-input" [(ngModel)]="jsonData" required></textarea>
-    <p *ngIf="response">Response: {{ response }}</p>
-    <label for="name">Template Name</label>
-    <input type="text" id="name" class="file-input" [(ngModel)]="templateName" required/>
+  <div class="left-container">
+    <div class="json-container">
+      <label for="json">JSON Data</label>
+      <textarea id="json" rows="10" cols="50" placeholder="Enter valid JSON here" class="file-input" [ngClass]="hasJsonErr? 'err-border' : ''" [(ngModel)]="jsonData" (change)="extractJsonFields(jsonData)" required></textarea>
+      <div *ngIf="hasJsonErr">
+        <p class="red">{{ fullJsonErr.jsonResponse }} </p>
+        <p class="red">{{ fullJsonErr.descriptiveJsonErr }} </p>
+      </div>
+    </div>
+    <div class="template-container">
+      <label for="name">Template Name</label>
+      <input type="text" id="name" class="file-input" [(ngModel)]="templateName" required/>
+    </div>
   </div>
 
   <div class="editor-container">
@@ -22,6 +29,7 @@
   </div>
 
   <div class="save-button-container">
+    <p *ngIf="serverResponse" class="red">Response: {{ serverResponse }}</p>
     <button (click)="saveContent()">Generate</button>
   </div>
 </div>

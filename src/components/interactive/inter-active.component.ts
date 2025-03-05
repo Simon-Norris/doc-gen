@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {QuillEditorComponent, QuillModule} from 'ngx-quill';
 import {FormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {NgForOf, NgIf, NgStyle} from '@angular/common';
+import {NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-interactive',
@@ -14,7 +14,8 @@ import {NgForOf, NgIf, NgStyle} from '@angular/common';
     NgIf,
     QuillModule,
     NgStyle,
-    NgForOf
+    NgForOf,
+    NgClass
   ],
   templateUrl: './inter-active.component.html',
   styleUrls: ['./inter-active.component.css']
@@ -34,7 +35,9 @@ export class InterActiveComponent {
     '}\n';
 
   templateName = 'Interactive templates';
-  response = '';
+  serverResponse = '';
+  hasJsonErr = false;
+  fullJsonErr: {jsonResponse:string, descriptiveJsonErr: string} = {jsonResponse: '', descriptiveJsonErr: ''};
 
   jsonFields: { id: string, label: string }[] = [];
   showJsonSelector: boolean = false; // To control the dropdown visibility
@@ -64,7 +67,6 @@ export class InterActiveComponent {
   }
 
   showJsonFieldSelector(): void {
-    this.jsonFields = this.extractJsonFields(this.jsonData)
     this.showJsonSelector = true;
     const selection = this.quill.quillEditor?.getSelection();
 
@@ -93,24 +95,24 @@ export class InterActiveComponent {
   }
 
   // Load JSON fields dynamically from jsonData
-  extractJsonFields(jsonData: string): { id: string, label: string }[] {
+  extractJsonFields(jsonData: string): void {
     try {
       const json = JSON.parse(jsonData);
-      return Object.keys(json).map((key) => ({
+      this.jsonFields = Object.keys(json).map((key) => ({
         id: key,
         label: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the label for better UI
       }));
-    } catch {
-      return [];
+      this.hasJsonErr = false
+    } catch(err: any) {
+      this.fullJsonErr.jsonResponse = 'Invalid json format !!!'
+      this.fullJsonErr.descriptiveJsonErr = err.toString()
+      this.hasJsonErr = true
     }
   }
 
 
   saveContent() {
-    if (!this.isValidJson(this.jsonData)) {
-      this.response = 'Invalid JSON format';
-      return;
-    }
+    if (this.hasJsonErr) return;
 
     let params = {
       "content": this.editorContent,
@@ -120,8 +122,8 @@ export class InterActiveComponent {
 
     this.http.post('http://localhost:9999/api/v1/rich-text/create-template', params).subscribe(
       (res: any) => {
-        if (res.templateId == undefined || res.templateId == null) {
-          this.response = "Template was not saved";
+        if (res.templateId == undefined) {
+          this.serverResponse = "Template was not saved";
           return;
         } else {
           this.generateFile(res.templateId);
@@ -129,7 +131,7 @@ export class InterActiveComponent {
       },
       (err) => {
         console.error(err);
-        this.response = 'Error processing request due to: ' + err.message;
+        this.serverResponse = 'Error processing request due to: ' + err.message;
       }
     );
   }
@@ -147,15 +149,6 @@ export class InterActiveComponent {
         console.error('Error downloading file:', error);
         alert(`Download failed: ${error.message}`);
       });
-  }
-
-  isValidJson(json: string): boolean {
-    try {
-      JSON.parse(json);
-      return true;
-    } catch {
-      return false;
-    }
   }
 }
 //TODO:: 1.interactive dropdown feature right on cursor 2. handle all kind of basic syntax provided by freemarker  3. json schema validation for nested and deep objects as well in user friendly manner
