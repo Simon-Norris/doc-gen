@@ -98,10 +98,11 @@ export class InterActiveComponent {
   extractJsonFields(jsonData: string): void {
     try {
       const json = JSON.parse(jsonData);
-      this.jsonFields = Object.keys(json).map((key) => ({
-        id: key,
-        label: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the label for better UI
-      }));
+      this.jsonFields = this.extractLeafNodes(json);
+      // this.jsonFields = Object.keys(json).map((key) => ({
+      //   id: key,
+      //   label: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the label for better UI
+      // }));
       this.hasJsonErr = false
     } catch(err: any) {
       this.fullJsonErr.jsonResponse = 'Invalid json format !!!'
@@ -150,5 +151,39 @@ export class InterActiveComponent {
         alert(`Download failed: ${error.message}`);
       });
   }
+
+  extractLeafNodes(obj: any, prefix: string = '', context: string = '', result: { id: string, label: string }[] = []): { id: string, label: string }[] {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const fullKey = prefix ? `${prefix}.${key}` : key; // Build the full key path
+        const value = obj[key];
+
+        // If the value is a primitive, add it to the result
+        if (typeof value !== 'object' || value === null) {
+          const label = key.charAt(0).toUpperCase() + key.slice(1);
+          const displayLabel = context ? `${label} (${context})` : label; // Add context if provided
+          result.push({
+            id: fullKey,
+            label: displayLabel,
+          });
+        }
+
+        // If the value is an object, recursively extract its fields
+        if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+          this.extractLeafNodes(value, fullKey, key, result); // Pass the current key as context
+        }
+
+        // If the value is an array, iterate through its items
+        if (Array.isArray(value)) {
+          value.forEach((item, index) => {
+            if (typeof item === 'object' && item !== null) {
+              this.extractLeafNodes(item, `${fullKey}[${index}]`, `Item ${index + 1}`, result); // Add item index as context
+            }
+          });
+        }
+      }
+    }
+    return result;
+  }
 }
-//TODO:: 1.interactive dropdown feature right on cursor 2. handle all kind of basic syntax provided by freemarker  3. json schema validation for nested and deep objects as well in user friendly manner
+//TODO::  1. handle all kind of basic syntax provided by freemarker  2. json schema validation for nested and deep objects as well in user friendly manner
