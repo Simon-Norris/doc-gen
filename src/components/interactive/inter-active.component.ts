@@ -24,6 +24,7 @@ export class InterActiveComponent {
 
   jsonData = '{\n' +
     '  "name": "John",\n' +
+    '  "gender": "Male",\n' +
     '  "age": 25,\n' +
     '  "items": [\n' +
     '    {"name": "Watch"},\n' +
