@@ -116,22 +116,4 @@ export class TemplateFormComponent {
 
     return ftlTemplate;
   }
-
-  previewTemplate() {
-    const ftlTemplate = this.generateFtlTemplate();
-    const dynamicData = {
-      name: "John",
-      age: 20,
-      gender: "Male",
-      items: ["Apple", "Banana", "Cherry"]
-    };
-    this.backendService.renderTemplate(ftlTemplate, JSON.stringify(dynamicData)).subscribe(
-      (response: any) => {
-        this.previewOutput = response.response;
-      },
-      error => {
-        console.error('Error rendering template:', error);
-      }
-    );
-  }
 }
