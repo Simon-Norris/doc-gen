@@ -1,16 +1,14 @@
 <div class="form-container">
   <form [formGroup]="templateForm">
-    <h2>Variables</h2>
     <div formArrayName="variables">
       <div *ngFor="let variable of variables.controls; let i = index" [formGroupName]="i">
         <input formControlName="name" placeholder="Variable Name">
         <input formControlName="value" placeholder="Value">
         <button type="button" (click)="variables.removeAt(i)">Remove</button>
       </div>
-      <button type="button" (click)="addVariable()">Add Variable</button>
+      <button type="button" (click)="addVariable()">Assign Variables</button>
     </div>
 
-    <h2>Conditions</h2>
     <div formArrayName="conditions">
       <div *ngFor="let condition of conditions.controls; let i = index" [formGroupName]="i">
         <input formControlName="expression" placeholder="Condition (e.g., age < 18)">
@@ -20,27 +18,25 @@
         <textarea formControlName="falseBlock" placeholder="False Block"></textarea>
         <button type="button" (click)="conditions.removeAt(i)">Remove</button>
       </div>
-      <button type="button" (click)="addCondition()">Add Condition</button>
+      <button type="button" (click)="addCondition()">Conditional Statements</button>
     </div>
 
-    <h2>Loops</h2>
     <div formArrayName="loops">
       <div *ngFor="let loop of loops.controls; let i = index" [formGroupName]="i">
         <input formControlName="listVariable" placeholder="List Variable (e.g., items)">
         <textarea formControlName="loopBody" placeholder="Loop Body"></textarea>
         <button type="button" (click)="loops.removeAt(i)">Remove</button>
       </div>
-      <button type="button" (click)="addLoop()">Add Loop</button>
+      <button type="button" (click)="addLoop()">Iterative expressions</button>
     </div>
 
-    <h2>Macros</h2>
     <div formArrayName="macros">
       <div *ngFor="let macro of macros.controls; let i = index" [formGroupName]="i">
         <input formControlName="name" placeholder="Macro Name">
         <textarea formControlName="body" placeholder="Macro Body"></textarea>
         <button type="button" (click)="macros.removeAt(i)">Remove</button>
       </div>
-      <button type="button" (click)="addMacro()">Add Macro</button>
+      <button type="button" (click)="addMacro()">Macros</button>
     </div>
   </form>
 </div>

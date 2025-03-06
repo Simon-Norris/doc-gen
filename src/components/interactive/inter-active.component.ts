@@ -45,6 +45,7 @@ export class InterActiveComponent {
   showJsonSelector: boolean = false; // To control the dropdown visibility
   dropdownPosition: any = {}; // To dynamically set dropdown position
   @ViewChild(QuillEditorComponent) quill!: QuillEditorComponent;
+  @ViewChild(TemplateFormComponent) expressionComponent!: TemplateFormComponent;
   cursorPosition: { index: number, length: number } | null = null;
 
   constructor(private http: HttpClient) { }

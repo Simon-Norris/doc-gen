@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {FtlTemplate} from '../interactive';
 import {BackendService} from '../backend.service';
@@ -17,7 +17,11 @@ import {NgForOf, NgIf} from '@angular/common';
 })
 export class TemplateFormComponent {
   templateForm: FormGroup;
-  previewOutput: string = '';
+
+  @Output() genVars = new EventEmitter<string>();
+  @Output() genConditionals = new EventEmitter<string>();
+  @Output() genLoops = new EventEmitter<string>();
+  @Output() genMacros = new EventEmitter<string>();
 
   constructor(private fb: FormBuilder, private backendService: BackendService) {
     this.templateForm = this.fb.group({
