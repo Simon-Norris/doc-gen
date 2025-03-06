@@ -67,6 +67,7 @@ export class InterActiveComponent {
   }
 
   showJsonFieldSelector(): void {
+    this.extractJsonFields(this.jsonData)
     this.showJsonSelector = true;
     const selection = this.quill.quillEditor?.getSelection();
 
