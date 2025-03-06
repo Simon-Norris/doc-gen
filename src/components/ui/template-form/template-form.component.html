@@ -1,16 +1,16 @@
 <div class="form-container">
   <!-- Buttons with Icons -->
   <div class="button-group">
-    <button type="button" (click)="toggleForm('variables')">
+    <button matTooltip="Assign variables" matTooltipPosition="above" type="button" (click)="toggleForm('variables')">
       <fa-icon [icon]="faPlus"/> Variables
     </button>
-    <button type="button" (click)="toggleForm('conditions')">
+    <button matTooltip="Write conditions" matTooltipPosition="above" type="button" (click)="toggleForm('conditions')">
       <fa-icon [icon]="faPlus"/> Conditions
     </button>
-    <button type="button" (click)="toggleForm('loops')">
+    <button matTooltip="Write iterations" matTooltipPosition="above"  type="button" (click)="toggleForm('loops')">
       <fa-icon [icon]="faPlus"/> Iterations
     </button>
-    <button type="button" (click)="toggleForm('macros')">
+    <button matTooltip="Add macros" matTooltipPosition="above"  type="button" (click)="toggleForm('macros')">
       <fa-icon [icon]="faPlus"/> Macros
     </button>
   </div>
@@ -23,16 +23,16 @@
           <input formControlName="name" placeholder="Variable Name">
           <input formControlName="value" placeholder="Value">
           <button type="button" class="rm-btn trash" (click)="variables.removeAt(i)">
-            <fa-icon [icon]="faMinus"/>
+            <fa-icon matTooltip="Remove variable" matTooltipPosition="below" [icon]="faMinus"/>
           </button>
         </div>
       </div>
       <div class="act-btn">
         <button type="button" class="add-btn" (click)="addVariable()">
-          <fa-icon [icon]="faPlus"/>
+          <fa-icon matTooltip="Add more" matTooltipPosition="above" [icon]="faPlus"/>
         </button>
         <button type="button" class="save-btn" (click)="saveVariables()">
-          <fa-icon [icon]="faSave"/>
+          <fa-icon matTooltip="Insert to editor" matTooltipPosition="above" [icon]="faSave"/>
         </button>
       </div>
     </form>
@@ -49,17 +49,17 @@
           <textarea formControlName="elseIfBlock" placeholder="Else If Block"></textarea>
           <textarea formControlName="falseBlock" placeholder="False Block"></textarea>
           <button type="button" class="rm-btn trash" (click)="conditions.removeAt(i)">
-            <fa-icon [icon]="faMinus"/>
+            <fa-icon matTooltip="Remove condition" matTooltipPosition="below" [icon]="faMinus"/>
           </button>
         </div>
       </div>
 
       <div class="act-btn">
         <button type="button" class="add-btn" (click)="addCondition()">
-          <fa-icon [icon]="faPlus"/>
+          <fa-icon matTooltip="Add more" matTooltipPosition="above" [icon]="faPlus"/>
         </button>
         <button type="button" class="save-btn" (click)="saveConditions()">
-          <fa-icon [icon]="faSave"/>
+          <fa-icon matTooltip="Insert to editor" matTooltipPosition="above" [icon]="faSave"/>
         </button>
       </div>
     </form>
@@ -73,17 +73,17 @@
           <input formControlName="listVariable" placeholder="List Variable (e.g., items)">
           <textarea formControlName="loopBody" placeholder="Loop Body"></textarea>
           <button type="button" class="rm-btn trash" (click)="loops.removeAt(i)">
-            <fa-icon [icon]="faMinus"/>
+            <fa-icon matTooltip="Remove iteration" matTooltipPosition="below" [icon]="faMinus"/>
           </button>
         </div>
       </div>
 
       <div class="act-btn">
         <button type="button" class="add-btn" (click)="addLoop()">
-          <fa-icon [icon]="faPlus"/>
+          <fa-icon matTooltip="Add more" matTooltipPosition="above" [icon]="faPlus"/>
         </button>
         <button type="button" class="save-btn" (click)="saveLoops()">
-          <fa-icon [icon]="faSave"/>
+          <fa-icon matTooltip="Insert to editor" matTooltipPosition="above" [icon]="faSave"/>
         </button>
       </div>
     </form>
@@ -97,17 +97,17 @@
           <input formControlName="name" placeholder="Macro Name">
           <textarea formControlName="body" placeholder="Macro Body"></textarea>
           <button type="button" class="rm-btn trash" (click)="macros.removeAt(i)">
-            <fa-icon [icon]="faMinus"/>
+            <fa-icon matTooltip="Remove macro" matTooltipPosition="below" [icon]="faMinus"/>
           </button>
         </div>
       </div>
 
       <div class="act-btn">
         <button type="button" class="add-btn" (click)="addMacro()">
-          <fa-icon [icon]="faPlus"/>
+          <fa-icon matTooltip="Add more" matTooltipPosition="above" [icon]="faPlus"/>
         </button>
         <button type="button" class="save-btn" (click)="saveMacros()">
-          <fa-icon [icon]="faSave"/>
+          <fa-icon matTooltip="Insert to editor" matTooltipPosition="above" [icon]="faSave"/>
         </button>
       </div>
     </form>

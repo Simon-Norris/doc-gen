@@ -4,6 +4,7 @@ import { NgForOf, NgIf } from '@angular/common';
 import {FtlTemplate} from '../interactive';
 import {FaIconComponent, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {faPlus, faSave, faTrash} from '@fortawesome/free-solid-svg-icons';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-template-form',
@@ -14,7 +15,8 @@ import {faPlus, faSave, faTrash} from '@fortawesome/free-solid-svg-icons';
     NgForOf,
     NgIf,
     FaIconComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatTooltipModule
   ],
   styleUrls: ['./template-form.component.css']
 })
