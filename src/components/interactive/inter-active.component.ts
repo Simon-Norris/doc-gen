@@ -3,6 +3,7 @@ import {QuillEditorComponent, QuillModule} from 'ngx-quill';
 import {FormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
+import {TemplateFormComponent} from '../ui/template-form/template-form.component';
 
 @Component({
   selector: 'app-interactive',
@@ -15,7 +16,8 @@ import {NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
     QuillModule,
     NgStyle,
     NgForOf,
-    NgClass
+    NgClass,
+    TemplateFormComponent
   ],
   templateUrl: './inter-active.component.html',
   styleUrls: ['./inter-active.component.css']

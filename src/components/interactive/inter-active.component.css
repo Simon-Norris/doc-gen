@@ -1,7 +1,7 @@
 /* Main container for the layout */
 .interactive-container {
   display: grid;
-  grid-template-columns: 1fr 2fr; /* JSON editor on the left, Quill editor on the right */
+  grid-template-columns: 1fr 2fr 1fr; /* JSON editor on the left, Quill editor on the middle and expression container on right */
   gap: 20px;
   padding: 20px;
 }
@@ -12,7 +12,7 @@
   flex-direction: column;
 }
 
-.left-container label {
+.left-container, .expressions-container label {
   font-weight: bold;
   margin-bottom: 5px;
 }
@@ -26,7 +26,7 @@
   margin-top: 16px;
 }
 
-.editor-container {
+.editor-container, .expressions-container {
   display: flex;
   flex-direction: column;
 }
