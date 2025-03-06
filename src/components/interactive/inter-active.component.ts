@@ -213,11 +213,15 @@ export class InterActiveComponent {
   dynamicInsertionOfExpressions(textToInsert: string) {
     const quillEditor = this.quill.quillEditor;
 
-    if (this.cursorPosition) {
-      quillEditor.setSelection(this.cursorPosition.index, this.cursorPosition.length);
-      quillEditor.insertText(this.cursorPosition.index, textToInsert);
+    const selection = quillEditor?.getSelection();
+
+    if (selection) {
+      this.cursorPosition = { index: selection.index, length: selection.length };
+    } else {
+      this.cursorPosition = { index: -1, length: -1 };
     }
+    quillEditor.setSelection(this.cursorPosition.index, this.cursorPosition.length);
+    quillEditor.insertText(this.cursorPosition.index, textToInsert);
   }
 
 }
-//TODO::  1. handle all kind of basic syntax provided by freemarker  2. json schema validation for nested and deep objects as well in user friendly manner
