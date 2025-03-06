@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
-import {FtlTemplate} from '../interactive';
+import {Condition, FtlTemplate, Loop, Macro, Variable} from '../interactive';
 import {FaIconComponent, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {faPlus, faSave, faTrash} from '@fortawesome/free-solid-svg-icons';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -27,10 +27,10 @@ export class TemplateFormComponent {
   templateForm: FormGroup;
 
   // Outputs to emit data to the parent component
-  @Output() genVars = new EventEmitter<any[]>();
-  @Output() genConditionals = new EventEmitter<any[]>();
-  @Output() genLoops = new EventEmitter<any[]>();
-  @Output() genMacros = new EventEmitter<any[]>();
+  @Output() genVars = new EventEmitter<string>();
+  @Output() genConditionals = new EventEmitter<string>();
+  @Output() genLoops = new EventEmitter<string>();
+  @Output() genMacros = new EventEmitter<string>();
 
   // Track which form is currently visible
   activeForm: 'variables' | 'conditions' | 'loops' | 'macros' | null = null;
@@ -102,25 +102,55 @@ export class TemplateFormComponent {
 
   // Save and emit variables
   saveVariables() {
-    this.genVars.emit(this.variables.value);
-    this.toggleForm('variables'); // Hide the form after saving
+    let variables = ''
+    this.variables.value.forEach((variable: Variable) => {
+      variables += `<#assign ${variable.name} = "${variable.value}">\n`;
+    });
+    this.genVars.emit(variables);
+    this.toggleForm('variables');
   }
 
   // Save and emit conditions
   saveConditions() {
-    this.genConditionals.emit(this.conditions.value);
+    let conditions = ''
+    this.conditions.value.forEach((condition: Condition) => {
+      conditions += `<#if (${condition.expression})>\n`;
+      conditions += `${condition.trueBlock}\n`;
+      if (condition.elseIfBlock && condition.elseIfExpression) {
+        conditions += `<#elseif (${condition.elseIfExpression})>\n`;
+        conditions += `${condition.elseIfBlock}\n`;
+      }
+      if (condition.falseBlock) {
+        conditions += `<#else>\n`;
+        conditions += `${condition.falseBlock}\n`;
+      }
+      conditions += `</#if>\n`;
+    });
+    this.genConditionals.emit(conditions);
     this.toggleForm('conditions'); // Hide the form after saving
   }
 
   // Save and emit loops
   saveLoops() {
-    this.genLoops.emit(this.loops.value);
+    let iterations = ''
+    this.loops.value.forEach((loop: Loop) => {
+      iterations += `<#list ${loop.listVariable} as item>\n`;
+      iterations += `${loop.loopBody}\n`;
+      iterations += `</#list>\n`;
+    });
+    this.genLoops.emit(iterations);
     this.toggleForm('loops'); // Hide the form after saving
   }
 
   // Save and emit macros
   saveMacros() {
-    this.genMacros.emit(this.macros.value);
+    let macros = ''
+    this.macros.value.forEach((macro: Macro) => {
+      macros += `<#macro ${macro.name}>\n`;
+      macros += `${macro.body}\n`;
+      macros += `</#macro>\n`;
+    });
+    this.genMacros.emit(macros);
     this.toggleForm('macros'); // Hide the form after saving
   }
 

@@ -31,7 +31,12 @@
 
   <div class="expressions-container">
     <label>Expressions</label>
-    <app-template-form/>
+    <app-template-form
+      (genVars)="onVariablesSaved($event)"
+      (genConditionals)="onConditionsSaved($event)"
+      (genLoops)="onLoopsSaved($event)"
+      (genMacros)="onMacrosSaved($event)"
+    ></app-template-form>
   </div>
 
   <div class="save-button-container">

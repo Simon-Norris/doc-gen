@@ -189,5 +189,35 @@ export class InterActiveComponent {
     }
     return result;
   }
+
+  onVariablesSaved(variables: string) {
+    console.log('Variables Saved:', variables);
+    this.dynamicInsertionOfExpressions(variables)
+  }
+
+  onConditionsSaved(conditions: string) {
+    console.log('Conditions Saved:', conditions);
+    this.dynamicInsertionOfExpressions(conditions)
+  }
+
+  onLoopsSaved(loops: string) {
+    console.log('Loops Saved:', loops);
+    this.dynamicInsertionOfExpressions(loops)
+  }
+
+  onMacrosSaved(macros: string) {
+    console.log('Macros Saved:', macros);
+    this.dynamicInsertionOfExpressions(macros)
+  }
+
+  dynamicInsertionOfExpressions(textToInsert: string) {
+    const quillEditor = this.quill.quillEditor;
+
+    if (this.cursorPosition) {
+      quillEditor.setSelection(this.cursorPosition.index, this.cursorPosition.length);
+      quillEditor.insertText(this.cursorPosition.index, textToInsert);
+    }
+  }
+
 }
 //TODO::  1. handle all kind of basic syntax provided by freemarker  2. json schema validation for nested and deep objects as well in user friendly manner
