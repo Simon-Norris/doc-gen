@@ -81,3 +81,18 @@ nav a.active {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.add-btn{
+  background-color: darkgoldenrod !important;
+  color: white !important;
+}
+
+.rm-btn {
+  background-color: red !important;
+  color: white !important;
+}
+.save-btn{
+  background-color: darkgreen !important;
+  color: white !important;
+}

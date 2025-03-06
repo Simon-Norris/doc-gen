@@ -2,8 +2,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
 import {FtlTemplate} from '../interactive';
-import {FaIconComponent, FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import {FaIconComponent, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {faPlus, faSave, faTrash} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-template-form',
@@ -20,7 +20,8 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 })
 export class TemplateFormComponent {
   faPlus = faPlus;
-  faMinus = faMinus;
+  faMinus = faTrash;
+  faSave = faSave;
   templateForm: FormGroup;
 
   // Outputs to emit data to the parent component

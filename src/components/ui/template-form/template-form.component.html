@@ -19,14 +19,22 @@
   <div *ngIf="activeForm === 'variables'" class="form-section">
     <form [formGroup]="templateForm">
       <div formArrayName="variables">
-        <div *ngFor="let variable of variables.controls; let i = index" [formGroupName]="i">
+        <div *ngFor="let variable of variables.controls; let i = index" [formGroupName]="i" class="act-div">
           <input formControlName="name" placeholder="Variable Name">
           <input formControlName="value" placeholder="Value">
-          <button type="button" (click)="variables.removeAt(i)">Remove</button>
+          <button type="button" class="rm-btn trash" (click)="variables.removeAt(i)">
+            <fa-icon [icon]="faMinus"/>
+          </button>
         </div>
       </div>
-      <button type="button" (click)="addVariable()">Add Variable</button>
-      <button type="button" (click)="saveVariables()">Save Variables</button>
+      <div class="act-btn">
+        <button type="button" class="add-btn" (click)="addVariable()">
+          <fa-icon [icon]="faPlus"/>
+        </button>
+        <button type="button" class="save-btn" (click)="saveVariables()">
+          <fa-icon [icon]="faSave"/>
+        </button>
+      </div>
     </form>
   </div>
 
@@ -34,17 +42,26 @@
   <div *ngIf="activeForm === 'conditions'" class="form-section">
     <form [formGroup]="templateForm">
       <div formArrayName="conditions">
-        <div *ngFor="let condition of conditions.controls; let i = index" [formGroupName]="i">
+        <div *ngFor="let condition of conditions.controls; let i = index" [formGroupName]="i" class="act-div">
           <input formControlName="expression" placeholder="Condition (e.g., age < 18)">
           <textarea formControlName="trueBlock" placeholder="True Block"></textarea>
           <input formControlName="elseIfExpression" placeholder="Condition (e.g., age > 18 && age < 50)">
           <textarea formControlName="elseIfBlock" placeholder="Else If Block"></textarea>
           <textarea formControlName="falseBlock" placeholder="False Block"></textarea>
-          <button type="button" (click)="conditions.removeAt(i)">Remove</button>
+          <button type="button" class="rm-btn trash" (click)="conditions.removeAt(i)">
+            <fa-icon [icon]="faMinus"/>
+          </button>
         </div>
       </div>
-      <button type="button" (click)="addCondition()">Add Condition</button>
-      <button type="button" (click)="saveConditions()">Save Conditions</button>
+
+      <div class="act-btn">
+        <button type="button" class="add-btn" (click)="addCondition()">
+          <fa-icon [icon]="faPlus"/>
+        </button>
+        <button type="button" class="save-btn" (click)="saveConditions()">
+          <fa-icon [icon]="faSave"/>
+        </button>
+      </div>
     </form>
   </div>
 
@@ -52,14 +69,23 @@
   <div *ngIf="activeForm === 'loops'" class="form-section">
     <form [formGroup]="templateForm">
       <div formArrayName="loops">
-        <div *ngFor="let loop of loops.controls; let i = index" [formGroupName]="i">
+        <div *ngFor="let loop of loops.controls; let i = index" [formGroupName]="i" class="act-div">
           <input formControlName="listVariable" placeholder="List Variable (e.g., items)">
           <textarea formControlName="loopBody" placeholder="Loop Body"></textarea>
-          <button type="button" (click)="loops.removeAt(i)">Remove</button>
+          <button type="button" class="rm-btn trash" (click)="loops.removeAt(i)">
+            <fa-icon [icon]="faMinus"/>
+          </button>
         </div>
       </div>
-      <button type="button" (click)="addLoop()">Add Loop</button>
-      <button type="button" (click)="saveLoops()">Save Loops</button>
+
+      <div class="act-btn">
+        <button type="button" class="add-btn" (click)="addLoop()">
+          <fa-icon [icon]="faPlus"/>
+        </button>
+        <button type="button" class="save-btn" (click)="saveLoops()">
+          <fa-icon [icon]="faSave"/>
+        </button>
+      </div>
     </form>
   </div>
 
@@ -67,14 +93,23 @@
   <div *ngIf="activeForm === 'macros'" class="form-section">
     <form [formGroup]="templateForm">
       <div formArrayName="macros">
-        <div *ngFor="let macro of macros.controls; let i = index" [formGroupName]="i">
+        <div *ngFor="let macro of macros.controls; let i = index" [formGroupName]="i" class="act-div">
           <input formControlName="name" placeholder="Macro Name">
           <textarea formControlName="body" placeholder="Macro Body"></textarea>
-          <button type="button" (click)="macros.removeAt(i)">Remove</button>
+          <button type="button" class="rm-btn trash" (click)="macros.removeAt(i)">
+            <fa-icon [icon]="faMinus"/>
+          </button>
         </div>
       </div>
-      <button type="button" (click)="addMacro()">Add Macro</button>
-      <button type="button" (click)="saveMacros()">Save Macros</button>
+
+      <div class="act-btn">
+        <button type="button" class="add-btn" (click)="addMacro()">
+          <fa-icon [icon]="faPlus"/>
+        </button>
+        <button type="button" class="save-btn" (click)="saveMacros()">
+          <fa-icon [icon]="faSave"/>
+        </button>
+      </div>
     </form>
   </div>
 </div>
