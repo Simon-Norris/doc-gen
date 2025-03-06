@@ -1,42 +1,80 @@
 <div class="form-container">
-  <form [formGroup]="templateForm">
-    <div formArrayName="variables">
-      <div *ngFor="let variable of variables.controls; let i = index" [formGroupName]="i">
-        <input formControlName="name" placeholder="Variable Name">
-        <input formControlName="value" placeholder="Value">
-        <button type="button" (click)="variables.removeAt(i)">Remove</button>
-      </div>
-      <button type="button" (click)="addVariable()">Assign Variables</button>
-    </div>
+  <!-- Buttons with Icons -->
+  <div class="button-group">
+    <button type="button" (click)="toggleForm('variables')">
+      <fa-icon [icon]="faPlus"/> Variables
+    </button>
+    <button type="button" (click)="toggleForm('conditions')">
+      <fa-icon [icon]="faPlus"/> Conditions
+    </button>
+    <button type="button" (click)="toggleForm('loops')">
+      <fa-icon [icon]="faPlus"/> Iterations
+    </button>
+    <button type="button" (click)="toggleForm('macros')">
+      <fa-icon [icon]="faPlus"/> Macros
+    </button>
+  </div>
 
-    <div formArrayName="conditions">
-      <div *ngFor="let condition of conditions.controls; let i = index" [formGroupName]="i">
-        <input formControlName="expression" placeholder="Condition (e.g., age < 18)">
-        <textarea formControlName="trueBlock" placeholder="True Block"></textarea>
-        <input formControlName="elseIfExpression" placeholder="Condition (e.g., age > 18 && age < 50)">
-        <textarea formControlName="elseIfBlock" placeholder="Else If Block"></textarea>
-        <textarea formControlName="falseBlock" placeholder="False Block"></textarea>
-        <button type="button" (click)="conditions.removeAt(i)">Remove</button>
+  <!-- Variables Form -->
+  <div *ngIf="activeForm === 'variables'" class="form-section">
+    <form [formGroup]="templateForm">
+      <div formArrayName="variables">
+        <div *ngFor="let variable of variables.controls; let i = index" [formGroupName]="i">
+          <input formControlName="name" placeholder="Variable Name">
+          <input formControlName="value" placeholder="Value">
+          <button type="button" (click)="variables.removeAt(i)">Remove</button>
+        </div>
       </div>
-      <button type="button" (click)="addCondition()">Conditional Statements</button>
-    </div>
+      <button type="button" (click)="addVariable()">Add Variable</button>
+      <button type="button" (click)="saveVariables()">Save Variables</button>
+    </form>
+  </div>
 
-    <div formArrayName="loops">
-      <div *ngFor="let loop of loops.controls; let i = index" [formGroupName]="i">
-        <input formControlName="listVariable" placeholder="List Variable (e.g., items)">
-        <textarea formControlName="loopBody" placeholder="Loop Body"></textarea>
-        <button type="button" (click)="loops.removeAt(i)">Remove</button>
+  <!-- Conditions Form -->
+  <div *ngIf="activeForm === 'conditions'" class="form-section">
+    <form [formGroup]="templateForm">
+      <div formArrayName="conditions">
+        <div *ngFor="let condition of conditions.controls; let i = index" [formGroupName]="i">
+          <input formControlName="expression" placeholder="Condition (e.g., age < 18)">
+          <textarea formControlName="trueBlock" placeholder="True Block"></textarea>
+          <input formControlName="elseIfExpression" placeholder="Condition (e.g., age > 18 && age < 50)">
+          <textarea formControlName="elseIfBlock" placeholder="Else If Block"></textarea>
+          <textarea formControlName="falseBlock" placeholder="False Block"></textarea>
+          <button type="button" (click)="conditions.removeAt(i)">Remove</button>
+        </div>
       </div>
-      <button type="button" (click)="addLoop()">Iterative expressions</button>
-    </div>
+      <button type="button" (click)="addCondition()">Add Condition</button>
+      <button type="button" (click)="saveConditions()">Save Conditions</button>
+    </form>
+  </div>
 
-    <div formArrayName="macros">
-      <div *ngFor="let macro of macros.controls; let i = index" [formGroupName]="i">
-        <input formControlName="name" placeholder="Macro Name">
-        <textarea formControlName="body" placeholder="Macro Body"></textarea>
-        <button type="button" (click)="macros.removeAt(i)">Remove</button>
+  <!-- Loops Form -->
+  <div *ngIf="activeForm === 'loops'" class="form-section">
+    <form [formGroup]="templateForm">
+      <div formArrayName="loops">
+        <div *ngFor="let loop of loops.controls; let i = index" [formGroupName]="i">
+          <input formControlName="listVariable" placeholder="List Variable (e.g., items)">
+          <textarea formControlName="loopBody" placeholder="Loop Body"></textarea>
+          <button type="button" (click)="loops.removeAt(i)">Remove</button>
+        </div>
       </div>
-      <button type="button" (click)="addMacro()">Macros</button>
-    </div>
-  </form>
+      <button type="button" (click)="addLoop()">Add Loop</button>
+      <button type="button" (click)="saveLoops()">Save Loops</button>
+    </form>
+  </div>
+
+  <!-- Macros Form -->
+  <div *ngIf="activeForm === 'macros'" class="form-section">
+    <form [formGroup]="templateForm">
+      <div formArrayName="macros">
+        <div *ngFor="let macro of macros.controls; let i = index" [formGroupName]="i">
+          <input formControlName="name" placeholder="Macro Name">
+          <textarea formControlName="body" placeholder="Macro Body"></textarea>
+          <button type="button" (click)="macros.removeAt(i)">Remove</button>
+        </div>
+      </div>
+      <button type="button" (click)="addMacro()">Add Macro</button>
+      <button type="button" (click)="saveMacros()">Save Macros</button>
+    </form>
+  </div>
 </div>

@@ -22,6 +22,8 @@
     "@angular/router": "^19.1.0",
     "@ckeditor/ckeditor5-angular": "^9.1.0",
     "@ckeditor/ckeditor5-build-classic": "^44.2.1",
+    "@fortawesome/angular-fontawesome": "^1.0.0",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "ngx-file-upload": "^0.0.1",
     "ngx-quill": "^27.0.0",
     "quill": "^2.0.3",

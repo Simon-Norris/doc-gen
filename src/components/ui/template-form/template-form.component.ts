@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { NgForOf, NgIf } from '@angular/common';
 import {FtlTemplate} from '../interactive';
-import {BackendService} from '../backend.service';
-import {NgForOf, NgIf} from '@angular/common';
+import {FaIconComponent, FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-template-form',
@@ -11,19 +12,27 @@ import {NgForOf, NgIf} from '@angular/common';
   imports: [
     ReactiveFormsModule,
     NgForOf,
-    NgIf
+    NgIf,
+    FaIconComponent,
+    FontAwesomeModule
   ],
   styleUrls: ['./template-form.component.css']
 })
 export class TemplateFormComponent {
+  faPlus = faPlus;
+  faMinus = faMinus;
   templateForm: FormGroup;
 
-  @Output() genVars = new EventEmitter<string>();
-  @Output() genConditionals = new EventEmitter<string>();
-  @Output() genLoops = new EventEmitter<string>();
-  @Output() genMacros = new EventEmitter<string>();
+  // Outputs to emit data to the parent component
+  @Output() genVars = new EventEmitter<any[]>();
+  @Output() genConditionals = new EventEmitter<any[]>();
+  @Output() genLoops = new EventEmitter<any[]>();
+  @Output() genMacros = new EventEmitter<any[]>();
 
-  constructor(private fb: FormBuilder, private backendService: BackendService) {
+  // Track which form is currently visible
+  activeForm: 'variables' | 'conditions' | 'loops' | 'macros' | null = null;
+
+  constructor(private fb: FormBuilder) {
     this.templateForm = this.fb.group({
       variables: this.fb.array([]),
       conditions: this.fb.array([]),
@@ -48,6 +57,12 @@ export class TemplateFormComponent {
     return this.templateForm.get('macros') as FormArray;
   }
 
+  // Toggle the active form
+  toggleForm(form: 'variables' | 'conditions' | 'loops' | 'macros') {
+    this.activeForm = this.activeForm === form ? null : form;
+  }
+
+  // Add a new variable
   addVariable() {
     this.variables.push(this.fb.group({
       name: '',
@@ -55,6 +70,7 @@ export class TemplateFormComponent {
     }));
   }
 
+  // Add a new condition
   addCondition() {
     this.conditions.push(this.fb.group({
       expression: '',
@@ -65,6 +81,7 @@ export class TemplateFormComponent {
     }));
   }
 
+  // Add a new loop
   addLoop() {
     this.loops.push(this.fb.group({
       listVariable: '',
@@ -72,6 +89,7 @@ export class TemplateFormComponent {
     }));
   }
 
+  // Add a new macro
   addMacro() {
     this.macros.push(this.fb.group({
       name: '',
@@ -79,6 +97,29 @@ export class TemplateFormComponent {
     }));
   }
 
+  // Save and emit variables
+  saveVariables() {
+    this.genVars.emit(this.variables.value);
+    this.toggleForm('variables'); // Hide the form after saving
+  }
+
+  // Save and emit conditions
+  saveConditions() {
+    this.genConditionals.emit(this.conditions.value);
+    this.toggleForm('conditions'); // Hide the form after saving
+  }
+
+  // Save and emit loops
+  saveLoops() {
+    this.genLoops.emit(this.loops.value);
+    this.toggleForm('loops'); // Hide the form after saving
+  }
+
+  // Save and emit macros
+  saveMacros() {
+    this.genMacros.emit(this.macros.value);
+    this.toggleForm('macros'); // Hide the form after saving
+  }
 
   generateFtlTemplate(): string {
     const template = this.templateForm.value as FtlTemplate;
