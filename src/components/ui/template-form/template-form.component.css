@@ -52,3 +52,8 @@ input, textarea {
 .trash{
   width: fit-content;
 }
+
+label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}

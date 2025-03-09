@@ -17,7 +17,8 @@
 
   <!-- Variables Form -->
   <div *ngIf="activeForm === 'variables'" class="form-section">
-    <form [formGroup]="templateForm">
+    <label for="var-form">Add Variables</label>
+    <form [formGroup]="templateForm" id="var-form">
       <div formArrayName="variables">
         <div *ngFor="let variable of variables.controls; let i = index" [formGroupName]="i" class="act-div">
           <input formControlName="name" placeholder="Variable Name">
@@ -40,7 +41,8 @@
 
   <!-- Conditions Form -->
   <div *ngIf="activeForm === 'conditions'" class="form-section">
-    <form [formGroup]="templateForm">
+    <label for="conditionals-form">Write Conditions</label>
+    <form [formGroup]="templateForm" id="conditionals-form">
       <div formArrayName="conditions">
         <div *ngFor="let condition of conditions.controls; let i = index" [formGroupName]="i" class="act-div">
           <input formControlName="expression" placeholder="Condition (e.g., age < 18)">
@@ -67,7 +69,8 @@
 
   <!-- Loops Form -->
   <div *ngIf="activeForm === 'loops'" class="form-section">
-    <form [formGroup]="templateForm">
+    <label for="loop-form">Write Iterations</label>
+    <form [formGroup]="templateForm" id="loop-form">
       <div formArrayName="loops">
         <div *ngFor="let loop of loops.controls; let i = index" [formGroupName]="i" class="act-div">
           <input formControlName="listVariable" placeholder="List Variable (e.g., items)">
@@ -91,7 +94,8 @@
 
   <!-- Macros Form -->
   <div *ngIf="activeForm === 'macros'" class="form-section">
-    <form [formGroup]="templateForm">
+    <label for="macros-form">Add Macros</label>
+    <form [formGroup]="templateForm" id="macros-form">
       <div formArrayName="macros">
         <div *ngFor="let macro of macros.controls; let i = index" [formGroupName]="i" class="act-div">
           <input formControlName="name" placeholder="Macro Name">
