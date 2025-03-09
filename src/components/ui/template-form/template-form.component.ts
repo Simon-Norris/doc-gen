@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
 import {Condition, FtlTemplate, Loop, Macro, Variable} from '../interactive';
@@ -25,6 +25,9 @@ export class TemplateFormComponent {
   faMinus = faTrash;
   faSave = faSave;
   templateForm: FormGroup;
+
+  @Input() extractedJsonFields!: { id: string; label: string }[];
+  @Input() rawJsonData!: string;
 
   // Outputs to emit data to the parent component
   @Output() genVars = new EventEmitter<string>();

@@ -102,11 +102,11 @@ export class InterActiveComponent {
   extractJsonFields(jsonData: string): void {
     try {
       const json = JSON.parse(jsonData);
-      this.jsonFields = this.extractLeafNodes(json);
-      // this.jsonFields = Object.keys(json).map((key) => ({
-      //   id: key,
-      //   label: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the label for better UI
-      // }));
+      // this.jsonFields = this.extractLeafNodes(json);
+      this.jsonFields = Object.keys(json).map((key) => ({
+        id: key,
+        label: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize the label for better UI
+      }));
       this.hasJsonErr = false
     } catch(err: any) {
       this.fullJsonErr.jsonResponse = 'Invalid json format !!!'

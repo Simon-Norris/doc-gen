@@ -36,6 +36,8 @@
       (genConditionals)="onConditionsSaved($event)"
       (genLoops)="onLoopsSaved($event)"
       (genMacros)="onMacrosSaved($event)"
+      [extractedJsonFields] = "this.jsonFields"
+      [rawJsonData] = "this.jsonData"
     ></app-template-form>
   </div>
 
