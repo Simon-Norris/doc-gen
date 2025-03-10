@@ -26,7 +26,7 @@ export class InterActiveComponent {
   editorContent = '';
 
   jsonData = '{\n' +
-    '  "name": "John",\n' +
+    '  "name": "Some & Co. $ nice name & what not",\n' +
     '  "gender": "Male",\n' +
     '  "age": 25,\n' +
     '  "items": [\n' +
